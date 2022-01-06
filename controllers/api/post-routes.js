@@ -1,20 +1,23 @@
 const router = require('express').Router();
-const sequelize = require('../../config/connection');
 const { Post, User, Comment } = require('../../models');
-const withAuth = require('../../utils/auth');
+//const withAuth = require('../../utils/auth');
 
-// get all users
+// get all posts
 router.get('/', (req, res) => {
   console.log('======================');
   Post.findAll({
     attributes: [
       'id',
-      'post_url',
+      'content',
       'title',
       'created_at'
     ],
-    order: [['created_at', 'DESC']],
+    order: [["created_at", "DESC"]],
     include: [
+      {
+        model: User,
+        attributes: ['username']
+      },
       {
         model: Comment,
         attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
@@ -22,10 +25,6 @@ router.get('/', (req, res) => {
           model: User,
           attributes: ['username']
         }
-      },
-      {
-        model: User,
-        attributes: ['username']
       }
     ]
   })
@@ -35,7 +34,7 @@ router.get('/', (req, res) => {
       res.status(500).json(err);
     });
 });
-
+// get one post
 router.get('/:id', (req, res) => {
   Post.findOne({
     where: {
@@ -43,11 +42,15 @@ router.get('/:id', (req, res) => {
     },
     attributes: [
       'id',
-      'post_url',
+      'content',
       'title',
       'created_at'
     ],
     include: [
+      {
+        model: User,
+        attributes: ['username']
+      },
       {
         model: Comment,
         attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
@@ -55,16 +58,12 @@ router.get('/:id', (req, res) => {
           model: User,
           attributes: ['username']
         }
-      },
-      {
-        model: User,
-        attributes: ['username']
       }
     ]
   })
     .then(dbPostData => {
       if (!dbPostData) {
-        res.status(404).json({ message: 'No post found with this id' });
+        res.status(404).json({ message: 'No blog post found with this id' });
         return;
       }
       res.json(dbPostData);
@@ -75,12 +74,15 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', withAuth, (req, res) => {
-  // expects {title: 'Taskmaster goes public!', post_url: 'https://taskmaster.com/press', user_id: 1}
+// create a post
+  // expects {title: 'My second blog post', content: 'bla bla blah', user_id: 1}
+//router.post('/', withAuth, (req, res) => {
+    router.post('/', (req, res) => {
+      console.log(req.body)
   Post.create({
     title: req.body.title,
-    post_url: req.body.post_url,
-    user_id: req.session.user_id
+    content: req.body.content,
+    user_id: req.body.user_id
   })
     .then(dbPostData => res.json(dbPostData))
     .catch(err => {
@@ -89,10 +91,14 @@ router.post('/', withAuth, (req, res) => {
     });
 });
 
-router.put('/:id', withAuth, (req, res) => {
+
+// update a post title or text
+//router.put('/:id', withAuth, (req, res) => {
+    router.put('/:id', (req, res) => {
   Post.update(
     {
-      title: req.body.title
+      title: req.body.title,
+      content: req.body.content,
     },
     {
       where: {
@@ -102,7 +108,7 @@ router.put('/:id', withAuth, (req, res) => {
   )
     .then(dbPostData => {
       if (!dbPostData) {
-        res.status(404).json({ message: 'No post found with this id' });
+        res.status(404).json({ message: 'No blog post found with this id' });
         return;
       }
       res.json(dbPostData);
@@ -112,8 +118,10 @@ router.put('/:id', withAuth, (req, res) => {
       res.status(500).json(err);
     });
 });
-
-router.delete('/:id', withAuth, (req, res) => {
+// delete a post
+//router.delete('/:id', withAuth, (req, res) => {
+    router.delete('/:id', (req, res) => {
+  console.log('id', req.params.id);
   Post.destroy({
     where: {
       id: req.params.id
@@ -121,7 +129,7 @@ router.delete('/:id', withAuth, (req, res) => {
   })
     .then(dbPostData => {
       if (!dbPostData) {
-        res.status(404).json({ message: 'No post found with this id' });
+        res.status(404).json({ message: 'No blog post found with this id' });
         return;
       }
       res.json(dbPostData);
