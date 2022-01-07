@@ -32,7 +32,7 @@ router.get('/', (req, res) => {
         // pass a single post object into the homepage template
       res.render('homepage', {
         posts,
-        // loggedIn: req.session.loggedIn
+        loggedIn: req.session.loggedIn
       });
     })
     .catch(err => {
@@ -98,6 +98,10 @@ router.get('/login', (req, res) => {
 
 // render the signup page
 router.get("/signup", (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }  
     res.render("signup");
   });
 
