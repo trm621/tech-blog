@@ -3,7 +3,7 @@ const User = require('./User');
 const Post = require('./Post');
 const Comment = require('./Comment');
 
-// create associations- verify on deletes working correctly
+// create associations
 
 // User  
 User.hasMany(Post, {
