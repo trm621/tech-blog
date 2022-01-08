@@ -16,7 +16,7 @@
   <nav>
     {{#if loggedIn}}
     <a href="/dashboard">Dashboard</a>
-    <a id="logout" class="btn-no-style" href="/">Logout</a>
+    <button id="logout" class="btn-no-style">Logout</button>
     {{else}}
     <a href="/login">Login</a>
     {{/if}}
@@ -31,10 +31,8 @@
       </h1>
     </header>
     <main>
-      {{{ content }}}
+      {{{ body }}}
     </main>
-    <footer>
-    </footer>
   </div>
 
 {{#if loggedIn}}

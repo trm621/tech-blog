@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const withAuth = require('../utils/auth')
 const { Post, User, Comment } = require('../models');
+const withAuth = require('../utils/auth');
 
 // get all posts for dashboard
-  router.get('/', withAuth, (req, res) => {
+router.get('/', withAuth, (req, res) => {
   console.log(req.session);
   console.log('======================');
   Post.findAll({
@@ -42,7 +42,7 @@ const { Post, User, Comment } = require('../models');
     });
 });
 
-    router.get('/edit/:id', withAuth, (req, res) => {
+router.get('/edit/:id', withAuth, (req, res) => {
   Post.findByPk(req.params.id, {
     attributes: [
       'id',
@@ -81,9 +81,14 @@ const { Post, User, Comment } = require('../models');
       res.status(500).json(err);
     });
 });
-// redirecting users to sign in page once they sign up
+
 router.get("/new", (req, res) => {
+  try {
     res.render("add-post");
+  } catch (error) {
+    res.json(error)
+  }
+   
   });
 
 module.exports = router;

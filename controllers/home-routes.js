@@ -1,8 +1,11 @@
+
 const router = require('express').Router();
+const sequelize = require('../config/connection');
 const { Post, User, Comment } = require('../models');
 
 // get all blog posts for homepage
 router.get('/', (req, res) => {
+  console.log(req.session);
   console.log('======================');
   Post.findAll({
     attributes: [
@@ -102,7 +105,7 @@ router.get("/signup", (req, res) => {
     res.redirect('/');
     return;
   }  
-    res.render("signup");
+  res.render("signup");
   });
 
 
