@@ -44,6 +44,17 @@ button:hover {
   padding: 0;
 }
 
+#content {
+  width: 600px;
+  height: 163px;
+  border: 1px solid black;
+  padding-bottom: 128px;
+}
+
+#post-title {
+  width: 600px;
+}
+
 textarea, input {
   padding: .5%;
   border-radius: 5px;
