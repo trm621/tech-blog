@@ -5,27 +5,15 @@
   </h2>
   <form class="edit-post-form">
     <div>
-      <label for="post-title">Title</label>
-      <input
-        class="form-input"
-        type="text"
-        id="post-title"
-        name="post-title"
-        value="{{post.title}}"
-      />
+      <h1>Title</h1>
+      <input name="post-title" type="text" value="{{post.title}}" />
     </div>
     <div>
-      <label for="post-content">Content</label>
-      <input
-        class="form-input"
-        id="content"
-        name="content"
-        value="{{post.content}}"
-      />
+     <label for="post-content">Content</label>
+     <input class="form-input" id="content" value="{{post.content}}">
     </div>
-
-    <button type="submit" class="btn">Update Post</button>
-    <button type="submit" class="delete-post-btn">Delete Post</button>
+    <button type="submit">Save Updated Post</button>
+    <button type="button" class="delete-post-btn">Delete Post</button>
   </form>
 </article>
 
