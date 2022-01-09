@@ -72,7 +72,7 @@ router.post('/login', (req, res) => {
   // expects {username: 'lernantino', password: 'password1234'}
   User.findOne({
     where: {
-      username: req.body.username,
+      username: req.body.username
     }
   }).then(dbUserData => {
     if (!dbUserData) {
@@ -94,7 +94,7 @@ router.post('/login', (req, res) => {
   
       res.json({ user: dbUserData, message: 'You are now logged in!' });
     });
-  });
+  }).catch (err =>res.status(500).json(err)) ;
 });
 // user logoout
 router.post('/logout', (req, res) => {

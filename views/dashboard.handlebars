@@ -1,8 +1,8 @@
-{{#if loggedIn}}
+<h1>Your Post History</h1>
 <section>
   <h2>Create New Post</h2>
 
-  <form class="new-post-form">
+  <form id="new-post-form">
     <div>
       <label for="post-title">Title</label>
       <input type="text" id="post-title" name="post-title" />
@@ -28,7 +28,6 @@
     {{/each}}
   </ol>
   </section>
-{{/if}}
 {{/if}}
 
 <script src="/javascript/add-post.js"></script>
