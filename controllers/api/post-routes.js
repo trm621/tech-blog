@@ -15,16 +15,16 @@ router.get('/', (req, res) => {
     order: [["created_at", "DESC"]],
     include: [
       {
-        model: User,
-        attributes: ['username']
-      },
-      {
         model: Comment,
         attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
         include: {
           model: User,
           attributes: ['username']
         }
+      },
+      {
+        model: User,
+        attributes: ['username']
       }
     ]
   })
@@ -48,16 +48,16 @@ router.get('/:id', (req, res) => {
     ],
     include: [
       {
-        model: User,
-        attributes: ['username']
-      },
-      {
         model: Comment,
         attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
         include: {
           model: User,
           attributes: ['username']
         }
+      },
+      {
+        model: User,
+        attributes: ['username']
       }
     ]
   })
@@ -76,7 +76,6 @@ router.get('/:id', (req, res) => {
 
 // create a post
 router.post('/', withAuth, (req, res) => {
-      console.log(req.body)
   Post.create({
     title: req.body.title,
     content: req.body.content,
@@ -117,7 +116,6 @@ router.post('/', withAuth, (req, res) => {
 });
 // delete a post
   router.delete('/:id', withAuth, (req, res) => {
-  console.log('id', req.params.id);
   Post.destroy({
     where: {
       id: req.params.id
