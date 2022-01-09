@@ -1,3 +1,5 @@
+/* imported style sheet from Module 14 */
+
 * {
   box-sizing: border-box;
 }
@@ -8,6 +10,7 @@ body, html {
   margin: 0;
   font-family: sans-serif;
   color: #333;
+  background-color:darkgray;
 }
 
 a {
