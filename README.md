@@ -1,7 +1,7 @@
 # Tech Today
   ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
   ## Description
-  ### A forum based website to post the latest tech news! Make anaccount or log in to an existing account to create posts, manage your post history, and comment on other members' posts!
+  ### A forum based website to post the latest tech news! Make an account or log in to an existing account to create posts, manage your post history, and comment on other members' posts!
   ## Link to Site
   ### https://salty-atoll-00439.herokuapp.com/
   ## Made With
@@ -14,7 +14,6 @@
   - Handlebars
   ## Table of Contents
   - <a href="#usage">Usage</a>
-  - <a href="#license">License</a>
   - <a href="#contributing">Contributing</a>
   - <a href="#screenshot">Screenshot</a>
   - <a href="#questions">Questions</a>
@@ -22,8 +21,6 @@
   ### Log in through the dashboard, then use the Nav bar to navigate between your dashboard, the forum itself, and the comments on each post!
   ## Contributing
   ### Thomas Maher
-  ## License
-    ### <a href="https://opensource.org/licenses/MIT">MIT</a>
   ## Screenshot
    ### ![Imgur](https://imgur.com/GRwG9Wz.png)
   ## Questions
